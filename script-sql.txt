@@ -1,0 +1,112 @@
+
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
+-- --------------------------------------------------
+-- Date Created: 07/21/2022 17:08:32
+-- Generated from EDMX file: C:\Users\laboratorio\Desktop\14_07 Progra\APIRest\APIRest\Models\Model1.edmx
+-- --------------------------------------------------
+
+SET QUOTED_IDENTIFIER OFF;
+GO
+USE [Tarea1];
+GO
+IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
+GO
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[FK_Producto_CategoriaProductos1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Producto] DROP CONSTRAINT [FK_Producto_CategoriaProductos1];
+GO
+
+-- --------------------------------------------------
+-- Dropping existing tables
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[CategoriaProductos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CategoriaProductos];
+GO
+IF OBJECT_ID(N'[dbo].[Producto]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Producto];
+GO
+IF OBJECT_ID(N'[dbo].[Usuario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Usuario];
+GO
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+-- Creating table 'CategoriaProductos'
+CREATE TABLE [dbo].[CategoriaProductos] (
+    [Id] int  NOT NULL,
+    [Nombre] nchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'Producto'
+CREATE TABLE [dbo].[Producto] (
+    [Id] int  NOT NULL,
+    [Nombre] nchar(30)  NOT NULL,
+    [Descripcion] nchar(200)  NOT NULL,
+    [Precio] int  NOT NULL,
+    [Stock] int  NOT NULL,
+    [IdCategoria] int  NOT NULL,
+    [imagen] nchar(200)  NULL
+);
+GO
+
+-- Creating table 'Usuario'
+CREATE TABLE [dbo].[Usuario] (
+    [email] nchar(320)  NOT NULL,
+    [nombre] nchar(100)  NOT NULL,
+    [pass] nchar(15)  NOT NULL
+);
+GO
+
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+-- Creating primary key on [Id] in table 'CategoriaProductos'
+ALTER TABLE [dbo].[CategoriaProductos]
+ADD CONSTRAINT [PK_CategoriaProductos]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Producto'
+ALTER TABLE [dbo].[Producto]
+ADD CONSTRAINT [PK_Producto]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [email] in table 'Usuario'
+ALTER TABLE [dbo].[Usuario]
+ADD CONSTRAINT [PK_Usuario]
+    PRIMARY KEY CLUSTERED ([email] ASC);
+GO
+
+-- --------------------------------------------------
+-- Creating all FOREIGN KEY constraints
+-- --------------------------------------------------
+
+-- Creating foreign key on [IdCategoria] in table 'Producto'
+ALTER TABLE [dbo].[Producto]
+ADD CONSTRAINT [FK_Producto_CategoriaProductos1]
+    FOREIGN KEY ([IdCategoria])
+    REFERENCES [dbo].[CategoriaProductos]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Producto_CategoriaProductos1'
+CREATE INDEX [IX_FK_Producto_CategoriaProductos1]
+ON [dbo].[Producto]
+    ([IdCategoria]);
+GO
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------
