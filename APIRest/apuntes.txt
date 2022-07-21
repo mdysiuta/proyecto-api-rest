@@ -1,0 +1,5 @@
+﻿1. Instalar en paquetes NuGet: WebApi.Cors
+2. Hacer modificaciones indicadas en /App_Start/WebApiConfig.cs
+3. Crear controlador de Web API 2 con acciones Entity Framework
+	3.1. Clase de modelo es CategoriaProductos, contexto de datos Tarea1Entities, nombre CategoriaProductosController
+4. Ir a Global.asax.cs y hacer modificaciones indicadas
